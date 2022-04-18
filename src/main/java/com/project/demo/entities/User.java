@@ -12,18 +12,24 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "firstname")
+    private String firstname;
+
+    @Column(name = "lastname")
+    private String lastname;
+
+    @Column(name = "email", unique = true)
+    private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<FondEntity> fonds;
+    private List<Fond> fonds;
 
     @Column(name = "password")
     private String password;

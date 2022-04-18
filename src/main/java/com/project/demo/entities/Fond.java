@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "fonds")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostEntity {
+public class Fond {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,18 @@ public class PostEntity {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "amount")
+    private Integer amount;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Post> posts;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<User> monthlySupport;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Event> events;
+
     @Column(name = "description")
     private String description;
-
 }
