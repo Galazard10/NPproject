@@ -34,6 +34,18 @@ public class HomeController {
         return new ResponseEntity<>(fonds, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/add-fond")
+    public ResponseEntity<String> toAddFond(@RequestParam("fondTitle") String title,
+                                            @RequestParam("fondAmount") Integer amount,
+                                            @RequestParam("fondDescription") String description){
+        Fond fond = new Fond();
+        fond.setTitle(title);
+        fond.setAmount(amount);
+        fond.setDescription(description);
+        fondsRepo.save(fond);
+        return new ResponseEntity<>("FOND ADDED", HttpStatus.OK);
+    }
+
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = usersRepo.findAll();
