@@ -36,4 +36,10 @@ public class Fond {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "category")
+    private String category;
 }
