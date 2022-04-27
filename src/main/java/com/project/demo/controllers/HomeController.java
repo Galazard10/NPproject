@@ -2,18 +2,16 @@ package com.project.demo.controllers;
 
 import com.project.demo.entities.Fond;
 import com.project.demo.entities.User;
-import com.project.demo.repos.FondsRepo;
-import com.project.demo.repos.UsersRepo;
 import com.project.demo.services.FondService;
 import com.project.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value="/api")
@@ -25,6 +23,9 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/")
     public String homepage() {
@@ -46,7 +47,6 @@ public class HomeController {
                                             @RequestParam("location") String location){
         Fond fond = new Fond();
         fond.setTitle(title);
-        fond.setAmount(amount);
         fond.setDescription(description);
         fond.setLocation(location);
         fondService.addFond(fond);
@@ -70,13 +70,18 @@ public class HomeController {
                                             @RequestParam("lastname") String lastName,
                                             @RequestParam("email") String email,
                                             @RequestParam("password") String password){
-        User user = new User();
-        user.setFirstname(firstName);
-        user.setLastname(lastName);
-        user.setEmail(email);
-        user.setPassword(password);
-        userService.addUser(user);
-        return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
+        User exists = userService.findUserByEmail(email);
+        if(exists != null) {
+            User user = new User();
+            user.setFirstname(firstName);
+            user.setLastname(lastName);
+            user.setEmail(email);
+//            user.setPassword(passwordEncoder.encode(password));
+            user.setPassword(password);
+            userService.addUser(user);
+            return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("ERROR", HttpStatus.OK);
     }
 
     @PostMapping(value = "/update-user")
@@ -90,6 +95,7 @@ public class HomeController {
             user.setFirstname(firstName);
             user.setLastname(lastName);
             user.setEmail(email);
+//            user.setPassword(passwordEncoder.encode(password));
             user.setPassword(password);
             userService.updateUser(user);
             return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);

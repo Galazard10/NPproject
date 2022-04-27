@@ -22,9 +22,6 @@ public class Fond {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "amount")
-    private Integer amount;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<Post> posts;
 
@@ -42,4 +39,7 @@ public class Fond {
 
     @Column(name = "category")
     private String category;
+
+    @Column(name = "img")
+    private String img;
 }
