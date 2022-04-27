@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,13 +41,14 @@ public class HomeController {
 
     @PostMapping(value = "/add-fond")
     public ResponseEntity<String> toAddFond(@RequestParam("fondTitle") String title,
-                                            @RequestParam("fondAmount") Integer amount,
                                             @RequestParam("fondDescription") String description,
-                                            @RequestParam("location") String location){
+                                            @RequestParam("location") String location,
+                                            @RequestParam("img") String img){
         Fond fond = new Fond();
         fond.setTitle(title);
         fond.setDescription(description);
         fond.setLocation(location);
+        fond.setImg(img);
         fondService.addFond(fond);
         return new ResponseEntity<>("FOND ADDED", HttpStatus.OK);
     }
