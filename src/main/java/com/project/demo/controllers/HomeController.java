@@ -1,6 +1,7 @@
 package com.project.demo.controllers;
 
 import com.project.demo.entities.Fond;
+import com.project.demo.entities.Role;
 import com.project.demo.entities.User;
 import com.project.demo.services.FondService;
 import com.project.demo.services.UserService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class HomeController {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/login")
     public String homepage() {
         return "Hello World!";
     }
@@ -78,6 +80,7 @@ public class HomeController {
             user.setEmail(email);
 //            user.setPassword(passwordEncoder.encode(password));
             user.setPassword(password);
+            user.setRoles(Collections.singleton(Role.USER));
             userService.addUser(user);
             return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
         }
