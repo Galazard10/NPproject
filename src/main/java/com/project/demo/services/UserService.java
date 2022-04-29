@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public User findUserById(Long id){
-        return usersRepo.getById(id);
+        return usersRepo.findById(id).orElse(null);
     }
 
     public void addUser(User user){

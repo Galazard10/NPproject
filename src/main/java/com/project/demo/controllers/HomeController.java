@@ -41,16 +41,14 @@ public class HomeController {
         return new ResponseEntity<>(fonds, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/fonds/{fondId}")
+    public ResponseEntity<Fond> getFondById(@PathVariable(name = "fondId") Long id){
+        Fond fond = fondService.findFondById(id);
+        return new ResponseEntity(fond, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/add-fond")
-    public ResponseEntity<String> toAddFond(@RequestParam("fondTitle") String title,
-                                            @RequestParam("fondDescription") String description,
-                                            @RequestParam("location") String location,
-                                            @RequestParam("img") String img){
-        Fond fond = new Fond();
-        fond.setTitle(title);
-        fond.setDescription(description);
-        fond.setLocation(location);
-        fond.setImg(img);
+    public ResponseEntity<String> toAddFond(@RequestBody Fond fond){
         fondService.addFond(fond);
         return new ResponseEntity<>("FOND ADDED", HttpStatus.OK);
     }
@@ -68,19 +66,9 @@ public class HomeController {
     }
 
     @PostMapping(value = "/add-user")
-    public ResponseEntity<String> toAddUser(@RequestParam("firstname") String firstName,
-                                            @RequestParam("lastname") String lastName,
-                                            @RequestParam("email") String email,
-                                            @RequestParam("password") String password){
-        User exists = userService.findUserByEmail(email);
+    public ResponseEntity<String> toAddUser(@RequestBody User user){
+        User exists = userService.findUserByEmail(user.getEmail());
         if(exists != null) {
-            User user = new User();
-            user.setFirstname(firstName);
-            user.setLastname(lastName);
-            user.setEmail(email);
-//            user.setPassword(passwordEncoder.encode(password));
-            user.setPassword(password);
-            user.setRoles(Collections.singleton(Role.USER));
             userService.addUser(user);
             return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
         }
@@ -88,18 +76,9 @@ public class HomeController {
     }
 
     @PostMapping(value = "/update-user")
-    public ResponseEntity<String> toUpdateUser(@RequestParam("userId") Long id,
-                                            @RequestParam("firstname") String firstName,
-                                            @RequestParam("lastname") String lastName,
-                                            @RequestParam("email") String email,
-                                            @RequestParam("password") String password){
-        User user = userService.findUserById(id);
-        if(user != null){
-            user.setFirstname(firstName);
-            user.setLastname(lastName);
-            user.setEmail(email);
-//            user.setPassword(passwordEncoder.encode(password));
-            user.setPassword(password);
+    public ResponseEntity<String> toUpdateUser(@RequestBody User user){
+        User exists = userService.findUserById(user.getId());
+        if(exists != null){
             userService.updateUser(user);
             return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);
         }

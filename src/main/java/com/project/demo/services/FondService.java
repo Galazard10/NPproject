@@ -31,6 +31,10 @@ public class FondService {
         return fondsRepo.searchNew(search, locations, categories);
     }
 
+    public Fond findFondById(Long id){
+        return fondsRepo.findById(id).orElse(null);
+    }
+
     public void addFond(Fond fond){
         fondsRepo.save(fond);
     }

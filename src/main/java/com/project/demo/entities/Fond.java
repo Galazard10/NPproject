@@ -31,6 +31,7 @@ public class Fond {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Event> events;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -40,6 +41,7 @@ public class Fond {
     @Column(name = "category")
     private String category;
 
+    @Lob
     @Column(name = "img")
     private String img;
 }
