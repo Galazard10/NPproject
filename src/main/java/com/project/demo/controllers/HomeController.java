@@ -1,7 +1,6 @@
 package com.project.demo.controllers;
 
 import com.project.demo.entities.Fond;
-import com.project.demo.entities.Role;
 import com.project.demo.entities.User;
 import com.project.demo.services.FondService;
 import com.project.demo.services.UserService;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
