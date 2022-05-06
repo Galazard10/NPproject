@@ -1,9 +1,7 @@
 package com.project.demo.controllers;
 
 import com.project.demo.entities.Fond;
-import com.project.demo.entities.User;
-import com.project.demo.services.FondService;
-import com.project.demo.services.UserService;
+import com.project.demo.services.FondServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -18,10 +16,7 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private FondService fondService;
-
-    @Autowired
-    private UserService userService;
+    private FondServiceImpl fondService;
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
@@ -51,41 +46,41 @@ public class HomeController {
         return new ResponseEntity<>("FOND ADDED", HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = userService.listAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/users/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable(name = "userId") Long id){
-        User user = userService.findUserById(id);
-        return new ResponseEntity(user, HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/add-user")
-    public ResponseEntity<String> toAddUser(@RequestBody User user){
-        User exists = userService.findUserByEmail(user.getEmail());
-        if(exists != null) {
-            userService.addUser(user);
-            return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("ERROR", HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/update-user")
-    public ResponseEntity<String> toUpdateUser(@RequestBody User user){
-        User exists = userService.findUserById(user.getId());
-        if(exists != null){
-            userService.updateUser(user);
-            return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("ERROR", HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/delete-user")
-    public ResponseEntity<String> toDeleteUser(@RequestParam(name = "userId") Long id){
-        userService.deleteUser(id);
-        return new ResponseEntity<>("DELETED", HttpStatus.OK);
-    }
+//    @GetMapping(value = "/users")
+//    public ResponseEntity<List<User>> getAllUsers(){
+//        List<User> users = userService.listAll();
+//        return new ResponseEntity<>(users, HttpStatus.OK);
+//    }
+//
+//    @GetMapping(value = "/users/{userId}")
+//    public ResponseEntity<User> getUserById(@PathVariable(name = "userId") Long id){
+//        User user = userService.findUserById(id);
+//        return new ResponseEntity(user, HttpStatus.OK);
+//    }
+//
+//    @PostMapping(value = "/add-user")
+//    public ResponseEntity<String> toAddUser(@RequestBody User user){
+//        User exists = userService.findUserByEmail(user.getEmail());
+//        if(exists != null) {
+//            userService.addUser(user);
+//            return new ResponseEntity<>("USER ADDED", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("ERROR", HttpStatus.OK);
+//    }
+//
+//    @PostMapping(value = "/update-user")
+//    public ResponseEntity<String> toUpdateUser(@RequestBody User user){
+//        User exists = userService.findUserById(user.getId());
+//        if(exists != null){
+//            userService.updateUser(user);
+//            return new ResponseEntity<>("USER UPDATED", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("ERROR", HttpStatus.OK);
+//    }
+//
+//    @PostMapping(value = "/delete-user")
+//    public ResponseEntity<String> toDeleteUser(@RequestParam(name = "userId") Long id){
+//        userService.deleteUser(id);
+//        return new ResponseEntity<>("DELETED", HttpStatus.OK);
+//    }
 }

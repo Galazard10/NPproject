@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class FondService {
+public class FondServiceImpl {
 
     @Autowired
     private FondsRepo fondsRepo;
@@ -22,10 +22,10 @@ public class FondService {
 //        List<String> locations = locationRepo.getAll();
         List<String> locations = Arrays.asList("Almaty", "Karagandy", "Taraz", "Nur-Sultan");
 
-        if(category != null){
+        if(category != null && category.length() > 0){
             categories = new ArrayList<>(Arrays.asList(category.split(",")));
         }
-        if(location != null){
+        if(location != null && location.length() > 0){
             locations = Collections.singletonList(location);
         }
         return fondsRepo.searchNew(search, locations, categories);

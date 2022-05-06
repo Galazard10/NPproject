@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,19 +32,14 @@ public class User implements UserDetails {
     @Column(name = "email", unique = true)
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Fond> fonds;
-
     @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+    private Collection<Role> roles = new ArrayList<>();
 
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Fond> fonds;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
