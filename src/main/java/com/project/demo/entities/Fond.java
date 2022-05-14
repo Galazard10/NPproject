@@ -23,10 +23,7 @@ public class Fond {
     private String title;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Post> posts;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<User> monthlySupport;
+    private List<News> news;
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Event> events;

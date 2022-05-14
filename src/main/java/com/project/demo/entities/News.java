@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class News {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
