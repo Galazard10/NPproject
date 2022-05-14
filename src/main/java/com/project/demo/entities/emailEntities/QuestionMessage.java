@@ -1,4 +1,4 @@
-package com.project.demo.entities;
+package com.project.demo.entities.emailEntities;
 
 public class QuestionMessage {
     private String fullname;
