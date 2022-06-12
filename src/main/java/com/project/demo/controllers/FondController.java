@@ -2,7 +2,6 @@ package com.project.demo.controllers;
 
 import com.project.demo.entities.Fond;
 import com.project.demo.services.FondService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/api")
 @CrossOrigin
-public class HomeController {
+public class FondController {
 
     @Autowired
     private FondService fondService;
@@ -33,9 +32,21 @@ public class HomeController {
         return new ResponseEntity(fond, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/add-fond")
+    @PostMapping(value = "/fonds/add-fond")
     public ResponseEntity<String> toAddFond(@RequestBody Fond fond){
         fondService.addFond(fond);
         return new ResponseEntity<>("FOND ADDED", HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/fonds/{fondId}/update-fond")
+    public ResponseEntity<String> toUpdateFond(@RequestBody Fond fond){
+        fondService.updateFond(fond);
+        return new ResponseEntity<>("FOND UPDATED", HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/fonds/delete-fond")
+    public ResponseEntity<String> toDeleteFond(@RequestParam(name="fondId") Long id){
+        fondService.deleteFond(id);
+        return new ResponseEntity<>("FOND DELETED", HttpStatus.OK);
     }
 }

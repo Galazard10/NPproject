@@ -38,4 +38,12 @@ public class FondService {
     public void addFond(Fond fond){
         fondsRepo.save(fond);
     }
+
+    public void updateFond(Fond fond){
+        fondsRepo.save(fond);
+    }
+
+    public void deleteFond(Long id){
+        fondsRepo.deleteById(id);
+    }
 }

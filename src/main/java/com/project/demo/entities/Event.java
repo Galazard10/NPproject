@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -21,7 +23,16 @@ public class Event {
     @Column(name = "title")
     private String title;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
+    @Column(name = "start_date")
+    private Date date;
+
+    @Column(name = "status")
+    private String status;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<User> users;
 }
