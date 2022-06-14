@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/login", "/api/fonds/**", "/api/users/ifexists", "/api/token/refresh/**", "/api/signup").permitAll();
         http.authorizeRequests().antMatchers("/api/send-question-email", "/api/send-request-email").permitAll();
+        http.authorizeRequests().antMatchers("/api/donations/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/events/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/users/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/events/**").hasAnyAuthority("USER");
