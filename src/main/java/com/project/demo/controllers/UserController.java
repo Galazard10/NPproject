@@ -4,6 +4,7 @@ import com.project.demo.entities.User;
 import com.project.demo.services.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -38,5 +39,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Object> logIn(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.loginUser(user));
+    }
+
+    @PostMapping("/users/{userId}/update-user")
+    public ResponseEntity<Object> updateUser(@RequestBody User user){
+        userService.updateUser(user);
+        return new ResponseEntity("USER UPDATED", HttpStatus.OK);
     }
 }

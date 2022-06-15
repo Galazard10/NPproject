@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface UserService {
     Object saveUser(User user);
-    Role saveRole(Role role);
     void addRoleToUser(String email, String roleName);
     User getUserByEmail(String email);
     List<User> getUsers();
     Boolean checkByEmail(String email);
     User getUserById(Long id);
     Object loginUser(User user);
+    void updateUser(User user);
 }

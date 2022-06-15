@@ -104,12 +104,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Role saveRole(Role role) {
-        log.info("Saving new role {} to the database", role.getRole());
-        return roleRepo.save(role);
-    }
-
-    @Override
     public void addRoleToUser(String email, String roleName) {
         log.info("Adding role {} to user {}", roleName, email);
         User user = usersRepo.findByEmail(email);
@@ -133,5 +127,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> getUsers() {
         log.info("Fetching all users");
         return usersRepo.findAll();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        usersRepo.save(user);
     }
 }
