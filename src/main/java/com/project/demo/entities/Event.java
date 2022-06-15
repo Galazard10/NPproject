@@ -1,5 +1,7 @@
 package com.project.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,12 +29,21 @@ public class Event {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "start_date")
+    @Column(name = "created_date")
+    private Date createdDate = new Date();
+
+    @Column(name = "date")
     private Date date;
 
     @Column(name = "status")
     private String status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<User> users;
+    @Column(name = "cashgoal")
+    private String cashgoal;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Fond fond;
 }

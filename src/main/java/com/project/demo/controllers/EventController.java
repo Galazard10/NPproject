@@ -2,6 +2,8 @@ package com.project.demo.controllers;
 
 import com.project.demo.entities.Event;
 import com.project.demo.services.EventService;
+import com.project.demo.services.FondService;
+import com.project.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,13 @@ import java.util.List;
 public class EventController {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private EventService eventService;
+
+    @Autowired
+    private FondService fondService;
 
     @GetMapping(value = "/events")
     public ResponseEntity<List<Event>> getAllEvents(){
@@ -29,8 +37,24 @@ public class EventController {
         return new ResponseEntity<Event>(event, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/events/user/{userId}")
+    public ResponseEntity<List<Event>> getEventsByUserId(@PathVariable(name = "userId") Long userId){
+        List<Event> events = eventService.listAllByUserId(userId);
+        return new ResponseEntity(events, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/events/fond/{fondId}")
+    public ResponseEntity<List<Event>> getEventsByFondId(@PathVariable(name = "fondId") Long fondId){
+        List<Event> events = eventService.listAllByFondId(fondId);
+        return new ResponseEntity(events, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/events/add-event")
-    public ResponseEntity<String> toAddEvent(@RequestBody Event event){
+    public ResponseEntity<String> toAddEvent(@RequestBody Event event,
+                                             @RequestParam(name = "fondId") Long fondId,
+                                             @RequestParam(name = "userId") Long userId){
+        event.setFond(fondService.findFondById(fondId));
+        event.setUser(userService.getUserById(userId));
         eventService.addEvent(event);
         return new ResponseEntity<>("EVENT ADDED", HttpStatus.OK);
     }

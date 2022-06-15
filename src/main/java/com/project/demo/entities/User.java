@@ -1,5 +1,6 @@
 package com.project.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,9 +40,4 @@ public class User{
 
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Fond> fonds;
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles;
-//    }
 }

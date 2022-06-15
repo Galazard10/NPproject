@@ -24,7 +24,7 @@ public class EmailController {
         SimpleMailMessage newMessage = new SimpleMailMessage();
 
         newMessage.setFrom(questionMessage.getEmail());
-        newMessage.setTo("qashqyn291@gmail.com");
+        newMessage.setTo("zhanashyrcompany@gmail.com");
         newMessage.setSubject(questionMessage.getQuestionType() + " - " + questionMessage.getFullname());
         newMessage.setText(questionMessage.getMessage() + "\n\n" + questionMessage.getFullname() + "\n" + questionMessage.getEmail() + "\n" + questionMessage.getPhoneNumber());
 
@@ -40,7 +40,7 @@ public class EmailController {
         SimpleMailMessage newMessage = new SimpleMailMessage();
 
         newMessage.setFrom(requestMessage.getEmail());
-        newMessage.setTo("qashqyn291@gmail.com");
+        newMessage.setTo("zhanashyrcompany@gmail.com");
         newMessage.setSubject("Өтініш: " + requestMessage.getPersonInfo() + ", " + requestMessage.getFondName());
         newMessage.setText(requestMessage.getMessage() + "\n\n" + requestMessage.getPersonInfo() + "\n" + requestMessage.getFondName() + "\n" + requestMessage.getPhoneNumber() + "\n" + requestMessage.getEmail());
 

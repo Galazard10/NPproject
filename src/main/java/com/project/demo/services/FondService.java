@@ -17,10 +17,8 @@ public class FondService {
     private FondsRepo fondsRepo;
 
     public List<Fond> listAll(String search, String location, String category) {
-//        List<String> categories = categoryRepo.getAll();
-        List<String> categories = Arrays.asList("Everyone", "Family", "Elder", "Children");
-//        List<String> locations = locationRepo.getAll();
-        List<String> locations = Arrays.asList("Almaty", "Karagandy", "Taraz", "Nur-Sultan");
+        List<String> categories = Arrays.asList("Барлығына","Ересектерге","Балаларға","Әйелдерге","Жануарлар","Қоғамға","Жасөспірімдерге","Қарттарға","Отбасыларға","Экологияға");
+        List<String> locations = Arrays.asList("Алматы", "Нұр-Сұлтан", "Шымкент", "Ақтөбе", "Қарағанды", "Тараз", "Павлодап", "Семей", "Өскемен", "Қызылорда", "Орал", "Қостанай", "Атырау", "Петропавл", "Ақтау", "Көкшетау", "Талдықорған");
 
         if(category != null && category.length() > 0){
             categories = new ArrayList<>(Arrays.asList(category.split(",")));

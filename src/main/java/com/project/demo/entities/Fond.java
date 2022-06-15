@@ -1,5 +1,6 @@
 package com.project.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,6 @@ public class Fond {
 
     @Column(name = "title")
     private String title;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<News> news;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Event> events;
 
     @Lob
     @Column(name = "description")

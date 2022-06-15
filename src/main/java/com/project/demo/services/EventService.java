@@ -21,6 +21,14 @@ public class EventService {
         return eventsRepo.findById(id).orElse(null);
     }
 
+    public List<Event> listAllByUserId(Long userId){
+        return eventsRepo.findAllByUserId(userId);
+    }
+
+    public List<Event> listAllByFondId(Long fondId){
+        return eventsRepo.findAllByFondId(fondId);
+    }
+
     public void addEvent(Event event){
         eventsRepo.save(event);
     }

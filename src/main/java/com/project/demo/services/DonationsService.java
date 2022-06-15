@@ -24,4 +24,16 @@ public class DonationsService {
     public void addDonation(Donations donation){
         donationsRepo.save(donation);
     }
+
+    public List<Donations> getAllByUserId(Long userId){
+        return donationsRepo.findAllByUserId(userId);
+    }
+
+    public List<Donations> getAllByFondId(Long fondId){
+        return donationsRepo.findAllByFondId(fondId);
+    }
+
+    public List<Donations> getAllByEventId(Long eventId){
+        return donationsRepo.findAllByEventId(eventId);
+    }
 }
